@@ -112,6 +112,7 @@ class YoloFormatTest(TestCase):
 
 
 DUMMY_DATASET_DIR = osp.join(osp.dirname(__file__), 'assets', 'yolo_dataset')
+print(osp.dirname(__file__))
 
 class YoloImporterTest(TestCase):
     def test_can_detect(self):

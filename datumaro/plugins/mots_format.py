@@ -51,7 +51,7 @@ class MotsPngExtractor(SourceExtractor):
 
     def _parse_categories(self, path):
         if osp.isfile(path):
-            with open(path) as f:
+            with open(path,encoding='utf-8') as f:
                 labels = [l.strip() for l in f]
         else:
             labels = [l.name for l in MotsLabels]
@@ -127,7 +127,7 @@ class MotsPngConverter(Converter):
 
                 self._save_annotations(item, anno_dir)
 
-            with open(osp.join(anno_dir, MotsPath.LABELS_FILE), 'w') as f:
+            with open(osp.join(anno_dir, MotsPath.LABELS_FILE), 'w',encoding='utf-8') as f:
                 f.write('\n'.join(l.name
                     for l in subset.categories()[AnnotationType.label].items))
 

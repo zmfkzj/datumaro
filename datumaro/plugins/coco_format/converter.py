@@ -89,8 +89,8 @@ class _TaskConverter:
                 ann['id'] = next_id
                 next_id += 1
 
-        with open(path, 'w') as outfile:
-            json.dump(self._data, outfile)
+        with open(path, 'w',encoding='utf-8') as outfile:
+            json.dump(self._data, outfile, ensure_ascii=False)
 
     @property
     def annotations(self):

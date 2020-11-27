@@ -58,7 +58,7 @@ class _VocExtractor(SourceExtractor):
 
     @staticmethod
     def _load_subset_list(subset_path):
-        with open(subset_path) as f:
+        with open(subset_path,encoding='utf-8') as f:
             return [line.split()[0] for line in f]
 
 class VocClassificationExtractor(_VocExtractor):
@@ -78,7 +78,7 @@ class VocClassificationExtractor(_VocExtractor):
         anno_files = [s for s in dir_items(task_dir, '.txt')
             if s.endswith('_' + osp.basename(self._path))]
         for ann_filename in anno_files:
-            with open(osp.join(task_dir, ann_filename)) as f:
+            with open(osp.join(task_dir, ann_filename),encoding='utf-8') as f:
                 label = ann_filename[:ann_filename.rfind('_')]
                 label_id = self._get_label_id(label)
                 for line in f:

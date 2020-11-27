@@ -70,7 +70,7 @@ class Converter(CliPlugin):
         if src_ext == dst_ext and osp.isfile(item.image.path):
             shutil.copyfile(item.image.path, path)
         elif src_ext == dst_ext and isinstance(item.image, ByteImage):
-            with open(path, 'wb') as f:
+            with open(path, 'wb',encoding='utf-8') as f:
                 f.write(item.image.get_bytes())
         else:
             save_image(path, item.image.data)

@@ -623,8 +623,8 @@ def ediff_command(args):
         output["matches"] = matches
 
     output_file = generate_next_file_name('diff', ext='.json')
-    with open(output_file, 'w') as f:
-        json.dump(output, f, indent=4, sort_keys=True)
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(output, f, indent=4, ensure_ascii=False, sort_keys=True)
 
     print("Found:")
     print("The first project has %s unmatched items" % len(a_extra))
@@ -727,8 +727,8 @@ def stats_command(args):
 
     dst_file = generate_next_file_name('statistics', ext='.json')
     log.info("Writing project statistics to '%s'" % dst_file)
-    with open(dst_file, 'w') as f:
-        json.dump(stats, f, indent=4, sort_keys=True)
+    with open(dst_file, 'w',encoding='utf-8') as f:
+        json.dump(stats, f, indent=4, ensure_ascii=False, sort_keys=True)
 
 def build_info_parser(parser_ctor=argparse.ArgumentParser):
     parser = parser_ctor(help="Get project info",

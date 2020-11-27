@@ -48,7 +48,7 @@ class OpenVinoImporter(CliPlugin):
 
 class InterpreterScript:
     def __init__(self, path):
-        with open(path, 'r') as f:
+        with open(path, 'r',encoding='utf-8') as f:
             script = f.read()
 
         context = {}

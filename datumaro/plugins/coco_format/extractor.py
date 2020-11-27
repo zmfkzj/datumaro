@@ -49,7 +49,7 @@ class _CocoExtractor(SourceExtractor):
     def _make_subset_loader(path):
         # COCO API has an 'unclosed file' warning
         coco_api = COCO()
-        with open(path, 'r') as f:
+        with open(path, 'r',encoding='utf-8') as f:
             import json
             dataset = json.load(f)
 

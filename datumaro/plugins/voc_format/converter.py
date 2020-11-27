@@ -293,7 +293,7 @@ class VocConverter(Converter):
                             VocTask.action_classification}:
                         ann_path = osp.join(self._ann_dir, item.id + '.xml')
                         os.makedirs(osp.dirname(ann_path), exist_ok=True)
-                        with open(ann_path, 'w') as f:
+                        with open(ann_path, 'w',encoding='utf-8') as f:
                             f.write(ET.tostring(root_elem,
                                 encoding='unicode', pretty_print=True))
 
@@ -351,7 +351,7 @@ class VocConverter(Converter):
         os.makedirs(self._action_subsets_dir, exist_ok=True)
 
         ann_file = osp.join(self._action_subsets_dir, subset_name + '.txt')
-        with open(ann_file, 'w') as f:
+        with open(ann_file, 'w',encoding='utf-8') as f:
             for item in action_list:
                 f.write('%s\n' % item)
 
@@ -363,7 +363,7 @@ class VocConverter(Converter):
         for action in all_actions:
             ann_file = osp.join(self._action_subsets_dir,
                 '%s_%s.txt' % (action, subset_name))
-            with open(ann_file, 'w') as f:
+            with open(ann_file, 'w',encoding='utf-8') as f:
                 for item, objs in action_list.items():
                     if not objs:
                         continue
@@ -381,7 +381,7 @@ class VocConverter(Converter):
         for label in self._label_map:
             ann_file = osp.join(self._cls_subsets_dir,
                 '%s_%s.txt' % (label, subset_name))
-            with open(ann_file, 'w') as f:
+            with open(ann_file, 'w',encoding='utf-8') as f:
                 for item, item_labels in class_lists.items():
                     if not item_labels:
                         continue
@@ -396,7 +396,7 @@ class VocConverter(Converter):
         os.makedirs(self._cls_subsets_dir, exist_ok=True)
 
         ann_file = osp.join(self._cls_subsets_dir, subset_name + '.txt')
-        with open(ann_file, 'w') as f:
+        with open(ann_file, 'w',encoding='utf-8') as f:
             for item in clsdet_list:
                 f.write('%s\n' % item)
 
@@ -407,7 +407,7 @@ class VocConverter(Converter):
         os.makedirs(self._segm_subsets_dir, exist_ok=True)
 
         ann_file = osp.join(self._segm_subsets_dir, subset_name + '.txt')
-        with open(ann_file, 'w') as f:
+        with open(ann_file, 'w',encoding='utf-8') as f:
             for item in segm_list:
                 f.write('%s\n' % item)
 
@@ -418,7 +418,7 @@ class VocConverter(Converter):
         os.makedirs(self._layout_subsets_dir, exist_ok=True)
 
         ann_file = osp.join(self._layout_subsets_dir, subset_name + '.txt')
-        with open(ann_file, 'w') as f:
+        with open(ann_file, 'w',encoding='utf-8') as f:
             for item, item_layouts in layout_list.items():
                 if item_layouts:
                     for obj_id in item_layouts:

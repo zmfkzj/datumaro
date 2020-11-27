@@ -206,7 +206,7 @@ class Config:
 
     @staticmethod
     def parse(path):
-        with open(path, 'r') as f:
+        with open(path, 'r',encoding='utf-8') as f:
             return Config(yaml.safe_load(f))
 
     @staticmethod
@@ -215,8 +215,8 @@ class Config:
             value._items(allow_internal=False, allow_fallback=False))
 
     def dump(self, path):
-        with open(path, 'w+') as f:
-            yaml.dump(self, f)
+        with open(path, 'w+',encoding='utf-8') as f:
+            yaml.dump(self, f, allow_unicode=True)
 
 yaml.add_multi_representer(Config, Config.yaml_representer)
 

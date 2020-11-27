@@ -13,7 +13,7 @@ def find_version(file_path=None):
         file_path = osp.join(osp.dirname(osp.abspath(__file__)),
             'datumaro', 'version.py')
 
-    with open(file_path, 'r') as version_file:
+    with open(file_path, 'r', encoding='utf-8') as version_file:
         version_text = version_file.read()
 
     # PEP440:
@@ -28,7 +28,7 @@ def find_version(file_path=None):
     return version
 
 
-with open('README.md', 'r') as fh:
+with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.dist.Distribution().fetch_build_eggs([
