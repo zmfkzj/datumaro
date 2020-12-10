@@ -13,12 +13,17 @@ import os.path as osp
 
 _IMAGE_BACKENDS = Enum('_IMAGE_BACKENDS', ['cv2', 'PIL'])
 _IMAGE_BACKEND = None
-try:
-    import cv2
-    _IMAGE_BACKEND = _IMAGE_BACKENDS.cv2
-except ImportError:
+
+if os.name =='nt':
     import PIL
     _IMAGE_BACKEND = _IMAGE_BACKENDS.PIL
+else:
+    try:
+        import cv2
+        _IMAGE_BACKEND = _IMAGE_BACKENDS.cv2
+    except ImportError:
+        import PIL
+        _IMAGE_BACKEND = _IMAGE_BACKENDS.PIL
 
 from datumaro.util.image_cache import ImageCache as _ImageCache
 
