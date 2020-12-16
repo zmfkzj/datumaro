@@ -46,12 +46,12 @@ class YoloConverter(Converter):
         for subset_name, subset in self._extractor.subsets().items():
             if not subset_name or subset_name == DEFAULT_SUBSET_NAME:
                 subset_name = YoloPath.DEFAULT_SUBSET_NAME
-            elif subset_name not in YoloPath.SUBSET_NAMES:
-                log.warn("Skipping subset export '%s'. "
-                    "If specified, the only valid names are %s" % \
-                    (subset_name, ', '.join(
-                        "'%s'" % s for s in YoloPath.SUBSET_NAMES)))
-                continue
+            # elif subset_name not in YoloPath.SUBSET_NAMES:
+            #     log.warn("Skipping subset export '%s'. "
+            #         "If specified, the only valid names are %s" % \
+            #         (subset_name, ', '.join(
+            #             "'%s'" % s for s in YoloPath.SUBSET_NAMES)))
+            #     continue
 
             subset_dir = osp.join(save_dir, 'obj_%s_data' % subset_name)
             os.makedirs(subset_dir, exist_ok=True)
