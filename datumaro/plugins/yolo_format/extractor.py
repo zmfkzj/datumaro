@@ -6,6 +6,7 @@
 from collections import OrderedDict
 import os.path as osp
 import re
+from pathlib import Path
 
 from datumaro.components.extractor import (SourceExtractor, Extractor,
     DatasetItem, AnnotationType, Bbox, LabelCategories, Importer
@@ -106,7 +107,7 @@ class YoloExtractor(SourceExtractor):
 
     @staticmethod
     def localize_path(path):
-        path = path.strip()
+        path = str(Path(path.strip()))
         default_base = osp.join('data', '')
         if path.startswith(default_base): # default path
             path = path[len(default_base) : ]
