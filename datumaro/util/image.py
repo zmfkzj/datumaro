@@ -83,7 +83,7 @@ def save_image(path, image, create_dir=False, dtype=np.uint8, **kwargs):
         from PIL import Image
 
         params = {}
-        params['quality'] = kwargs.get('jpeg_quality')
+        params['quality'] = kwargs.get('jpeg_quality', 75)
         if kwargs.get('jpeg_quality') == 100:
             params['subsampling'] = 0
 
