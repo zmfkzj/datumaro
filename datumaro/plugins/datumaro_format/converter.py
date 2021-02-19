@@ -184,6 +184,7 @@ class _SubsetWriter:
             converted['labels'].append({
                 'name': cast(label.name, str),
                 'parent': cast(label.parent, str),
+                'attributes': cast(label.attributes, list),
             })
         return converted
 

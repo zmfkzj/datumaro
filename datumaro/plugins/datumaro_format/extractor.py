@@ -41,7 +41,7 @@ class DatumaroExtractor(SourceExtractor):
         if parsed_label_cat:
             label_categories = LabelCategories()
             for item in parsed_label_cat['labels']:
-                label_categories.add(item['name'], parent=item['parent'])
+                label_categories.add(item['name'], parent=item['parent'], attributes=item['attributes'])
 
             categories[AnnotationType.label] = label_categories
 
