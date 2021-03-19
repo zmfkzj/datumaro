@@ -47,10 +47,14 @@ class Converter(CliPlugin):
         self._save_dir = save_dir
 
     def _find_image_ext(self, item):
+        id_ext = item.id.split('.')[-1]
+        if id_ext.lower() in ['jpg', 'jpeg', 'png', 'bmp']:
+            return ''
+
         src_ext = None
         if item.has_image:
             src_ext = item.image.ext
-
+        
         return self._image_ext or src_ext or self._default_image_ext
 
     def _make_image_filename(self, item):

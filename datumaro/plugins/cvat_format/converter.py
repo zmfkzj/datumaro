@@ -142,11 +142,12 @@ class XmlAnnotationWriter:
         self.xmlgen.endDocument()
 
 class _SubsetWriter:
-    def __init__(self, file, name, extractor, context):
+    def __init__(self, file, name, extractor, context, default_ext):
         self._writer = XmlAnnotationWriter(file)
         self._name = name
         self._extractor = extractor
         self._context = context
+        self._default_ext = default_ext
 
     def write(self):
         self._writer.open_root()
@@ -161,7 +162,7 @@ class _SubsetWriter:
         if not self._context._reindex:
             index = cast(item.attributes.get('frame'), int, index)
         image_info = OrderedDict([ ("id", str(index)), ])
-        filename = item.id + CvatPath.IMAGE_EXT
+        filename = item.id + self._find_image_ext(item)
         image_info["name"] = filename
         if item.has_image:
             size = item.image.size
@@ -187,6 +188,18 @@ class _SubsetWriter:
                 continue
 
         self._writer.close_image()
+
+    @staticmethod
+    def _find_image_ext(item):
+        id_ext = item.id.split('.')[-1]
+        if id_ext.lower() in ['jpg', 'jpeg', 'png', 'bmp']:
+            return ''
+
+        src_ext = None
+        if item.has_image:
+            src_ext = item.image.ext
+        
+        return src_ext or CvatPath.IMAGE_EXT
 
     def _write_meta(self):
         label_cat = self._extractor.categories()[AnnotationType.label]
@@ -328,5 +341,5 @@ class CvatConverter(Converter):
 
         for subset_name, subset in self._extractor.subsets().items():
             with open(osp.join(self._save_dir, '%s.xml' % subset_name), 'w',encoding='utf-8') as f:
-                writer = _SubsetWriter(f, subset_name, subset, self)
+                writer = _SubsetWriter(f, subset_name, subset, self, self.DEFAULT_IMAGE_EXT)
                 writer.write()
