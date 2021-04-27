@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 from collections import defaultdict
+from datumaro.components.extractor import Importer
 from glob import glob
 import git
 import importlib
@@ -19,7 +20,6 @@ from datumaro.components.config_model import (Model, Source,
 from datumaro.components.launcher import ModelTransform
 from datumaro.components.dataset import Dataset
 
-
 def import_foreign_module(name, path, package=None):
     module = None
     default_path = sys.path.copy()
@@ -29,6 +29,7 @@ def import_foreign_module(name, path, package=None):
         module = importlib.import_module(name, package=package)
         sys.modules.pop(name) # remove from cache
     except Exception:
+        print(name, path, package)
         raise
     finally:
         sys.path = default_path
@@ -153,7 +154,7 @@ class Environment:
 
         self.git = GitWrapper(config)
 
-        env_dir = osp.join(config.project_dir, config.env_dir)
+        env_dir = osp.abspath(osp.join(config.project_dir, config.env_dir))
         builtin = self._load_builtin_plugins()
         custom = self._load_plugins2(osp.join(env_dir, config.plugins_dir))
         select = lambda seq, t: [e for e in seq if issubclass(e, t)]
