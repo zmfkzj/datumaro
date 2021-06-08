@@ -59,7 +59,7 @@ class _VocExtractor(SourceExtractor):
     @staticmethod
     def _load_subset_list(subset_path):
         with open(subset_path,encoding='utf-8') as f:
-            return [line.split()[0] for line in f]
+            return [line.rstrip('\n') for line in f]
 
 class VocClassificationExtractor(_VocExtractor):
     def __iter__(self):

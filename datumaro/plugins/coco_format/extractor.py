@@ -203,7 +203,7 @@ class _CocoExtractor(SourceExtractor):
                     parsed_annotations.append(RleMask(rle=rle, label=label_id,
                         id=ann_id, attributes=attributes, group=group
                     ))
-            else:
+            # else:
                 parsed_annotations.append(
                     Bbox(x, y, w, h, label=label_id,
                         id=ann_id, attributes=attributes, group=group)
