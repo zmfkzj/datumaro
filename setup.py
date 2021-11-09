@@ -65,6 +65,7 @@ setuptools.setup(
         'PyYAML',
         'scikit-image',
         'tensorboardX',
+        'chardet'
     ],
     extras_require={
         'tf': ['tensorflow'],

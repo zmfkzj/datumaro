@@ -8,6 +8,7 @@ import logging as log
 import numpy as np
 import os.path as osp
 from defusedxml import ElementTree
+import chardet
 
 from datumaro.components.extractor import (SourceExtractor, DatasetItem,
     AnnotationType, Label, Mask, Bbox, CompiledMask
@@ -58,7 +59,9 @@ class _VocExtractor(SourceExtractor):
 
     @staticmethod
     def _load_subset_list(subset_path):
-        with open(subset_path,encoding='utf-8') as f:
+        with open(subset_path,'r+b') as f:
+            encoding = chardet.detect(f.read())['encoding']
+        with open(subset_path,encoding=encoding) as f:
             return [line.rstrip('\n') for line in f]
 
 class VocClassificationExtractor(_VocExtractor):
@@ -78,7 +81,9 @@ class VocClassificationExtractor(_VocExtractor):
         anno_files = [s for s in dir_items(task_dir, '.txt')
             if s.endswith('_' + osp.basename(self._path))]
         for ann_filename in anno_files:
-            with open(osp.join(task_dir, ann_filename),encoding='utf-8') as f:
+            with open(osp.join(task_dir, ann_filename),'r+b') as f:
+                encoding = chardet.detect(f.read())['encoding']
+            with open(osp.join(task_dir, ann_filename),encoding=encoding) as f:
                 label = ann_filename[:ann_filename.rfind('_')]
                 label_id = self._get_label_id(label)
                 for line in f:
